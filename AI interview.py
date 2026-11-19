@@ -1,19 +1,24 @@
 import streamlit as st
 
+
 st.set_page_config(
     page_title="LLM",
     layout="centered"
 )
 
+
 st.title("AI Interview")
 st.caption("Practice and Prepare for your placement")
-st.caption("Launched by Athiya firdose")
+st.caption("Launched by dumbitha")
+
 
 try:
     from groq import Groq
 except ImportError:
     st.error("Groq package is not installed.")
     st.stop()
+
+
 try:
     client = Groq(
         api_key=st.secrets["GROQ_API_KEY"]
@@ -25,6 +30,8 @@ except (KeyError, FileNotFoundError):
 st.success("Groq API connected successfully!")
 
 st.write("Welcome to your AI Interview Assistant.")
+
+
 role = st.selectbox(
     "Job Title",
     [
@@ -39,6 +46,8 @@ role = st.selectbox(
 
 if role == "Others":
     role = st.text_input("Enter your Job Title")
+
+
 model = st.selectbox(
     "Choose your model",
     [
@@ -46,14 +55,25 @@ model = st.selectbox(
         "openai/gpt-oss-20b"
     ]
 )
+
+
 level = st.selectbox(
     "Choose your level",
     ["Beginner", "Intermediate", "Advanced"]
 )
+
+
 mode = st.radio(
-    "Activity",[
-        "Generate Questions", "Generate Code Questions", "Evaluate Answers", "Improve Answers")
-]
+    "Activity",
+    [
+        "Generate Questions",
+        "Generate Code Questions",
+        "Evaluate Answers",
+        "Improve Answers"
+    ]
+)
+
+
 topic = ""
 count = 5
 question = ""
