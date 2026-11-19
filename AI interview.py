@@ -1,24 +1,19 @@
 import streamlit as st
 
-# Page configuration
 st.set_page_config(
     page_title="LLM",
     layout="centered"
 )
 
-# Application title
 st.title("AI Interview")
 st.caption("Practice and Prepare for your placement")
 st.caption("Launched by Athiya firdose")
 
-# Import Groq
 try:
     from groq import Groq
 except ImportError:
     st.error("Groq package is not installed.")
     st.stop()
-
-# API configuration
 try:
     client = Groq(
         api_key=st.secrets["GROQ_API_KEY"]
@@ -30,8 +25,6 @@ except (KeyError, FileNotFoundError):
 st.success("Groq API connected successfully!")
 
 st.write("Welcome to your AI Interview Assistant.")
-
-# Job role
 role = st.selectbox(
     "Job Title",
     [
@@ -46,8 +39,6 @@ role = st.selectbox(
 
 if role == "Others":
     role = st.text_input("Enter your Job Title")
-
-# Model selection
 model = st.selectbox(
     "Choose your model",
     [
@@ -55,25 +46,14 @@ model = st.selectbox(
         "openai/gpt-oss-20b"
     ]
 )
-
-# Difficulty level
 level = st.selectbox(
     "Choose your level",
     ["Beginner", "Intermediate", "Advanced"]
 )
-
-# Activity selection
 mode = st.radio(
-    "Activity",
-    [
-        "Generate Questions",
-        "Generate Code Questions",
-        "Evaluate Answers",
-        "Improve Answers"
-    ]
-)
-
-# Initialize variables
+    "Activity",[
+        "Generate Questions", "Generate Code Questions", "Evaluate Answers", "Improve Answers")
+]
 topic = ""
 count = 5
 question = ""
@@ -93,7 +73,7 @@ else:
     question = st.text_area("Enter Interview Question Here")
     answer = st.text_area("Enter Your Answer", height=160)
 
-# Generate response
+
 if st.button("Generate AI Response", type="primary"):
 
     if mode in ["Evaluate Answers", "Improve Answers"]:
