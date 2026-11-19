@@ -1,4 +1,3 @@
-pip  install streamlit groq
 import streamlit as st
 
 # Page configuration
